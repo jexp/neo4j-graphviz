@@ -1,0 +1,15 @@
+{
+  "name": "neo4j-graphviz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphviz": "0.0.8",
+    "neo4j-driver": "^1.1.1"
+  }
+}
