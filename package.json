@@ -2,7 +2,7 @@
   "name": "neo4j-graphviz",
   "version": "1.0.0",
   "description": "minimal javascript library/tool to generate graphviz visualization from a neo4j cypher query",
-  "main": "index.js",
+  "main": "neo4j-graphviz.js",
   "scripts": {
     "test": ""
   },
