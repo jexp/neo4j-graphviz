@@ -1,6 +1,6 @@
 {
   "name": "neo4j-graphviz",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "minimal javascript library/tool to generate graphviz visualization from a neo4j cypher query",
   "main": "neo4j-graphviz.js",
   "scripts": {
@@ -11,5 +11,12 @@
   "dependencies": {
     "graphviz": "0.0.8",
     "neo4j-driver": "^1.1.1"
+  },
+  "devDependencies": {
+    "express": "^4.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jexp/neo4j-graphviz.git"
   }
 }

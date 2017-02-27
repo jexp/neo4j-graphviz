@@ -130,7 +130,7 @@ function renderGraph(url, user, password, query, renderer, file, callback) {
             console.log("Wrote file "+file)
         } else {
             // Generate a callback output
-            g.render( {use:use, type:file_type}, function(data) { callback(null,data); }); // function(data) { console.log( file,data.length)}
+            g.render( {use:renderer, type:file_type}, function(data) { callback(null,data); }); // function(data) { console.log( file,data.length)}
         }
       })
       .catch(function(error) {
