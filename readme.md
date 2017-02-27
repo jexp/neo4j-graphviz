@@ -28,4 +28,4 @@ From the [Oscards Graph](http://gist.asciidoctor.org/?dropbox-14493611/oscars.ad
 echo 'MATCH  path = (n:Nominee {name:"Meryl Streep"})<-[:NOMINATED]-(a:Nomination)-->() RETURN path' | node index.js '****' oscars.svg neato
 ```
 
-![](https://raw.githubusercontent.com/jexp/neo4j-graphviz/master/oscars.svg)
+![](https://rawgithub.com/jexp/neo4j-graphviz/master/oscars.svg)
