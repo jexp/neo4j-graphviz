@@ -24,7 +24,7 @@ cat query.cypher | node render.js password [file.png/svg/jpg] [renderer]
 
 ### Example:
 
-From the [Oscards Graph](http://gist.asciidoctor.org/?dropbox-14493611/oscars.adoc).
+From the [Oscars Graph](http://gist.asciidoctor.org/?dropbox-14493611/oscars.adoc).
 
 ```
 echo 'MATCH  path = (n:Nominee {name:"Meryl Streep"})<-[:NOMINATED]-(a:Nomination)-->() RETURN path' | node render.js '****' oscars.svg neato
