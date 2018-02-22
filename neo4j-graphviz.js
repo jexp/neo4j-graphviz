@@ -86,7 +86,7 @@ function addRecord(digraph, data, record) {
     });
 }
     
-function renderGraph(url, user, password, query, renderer, file, callback) {
+function renderGraph(url, user, password, query, graphVizPath, renderer, file, callback) {
 
     var file_type = file.split(".").pop();
 
@@ -123,7 +123,7 @@ function renderGraph(url, user, password, query, renderer, file, callback) {
         session.close();
         driver.close();
     
-        g.setGraphVizPath( "/usr/local/bin" );
+        if(graphVizPath) g.setGraphVizPath( graphVizPath );
         // Generate a file output
         if (!callback) {
             g.render( {use:renderer, type:file_type}, file );

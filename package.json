@@ -9,6 +9,8 @@
   "author": "Michael Hunger",
   "license": "MIT",
   "dependencies": {
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^4.1.0",
     "graphviz": "0.0.8",
     "neo4j-driver": "^1.1.1"
   },
