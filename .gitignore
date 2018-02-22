@@ -2,6 +2,7 @@ node_modules
 *.jpg
 *.png
 *.dot
+*.svg
 
 .idea
 
