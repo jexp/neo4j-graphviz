@@ -7,7 +7,7 @@ var app = express();
 
 app.get('/', function(req, res){
   var type = "svg";
-  ng.renderGraph("bolt://localhost","neo4j", pwd, req.param("query"), "neato", type, function(error,data) {
+  ng.renderGraph("bolt://localhost","neo4j", pwd, req.param("query"), null, "neato", type, function(error,data) {
     if (error) res.status(500).send(error);
     else {
       res.type(type).send(data);
