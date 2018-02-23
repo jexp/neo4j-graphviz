@@ -22,6 +22,10 @@ Typical usage:
 cat query.cypher | node render.js --username <neo4j username> --password <neo4j password> --file [file.png/svg/jpg] --renderer [renderer]
 ```
 
+For full syntax specification, run
+```
+node render.js --help
+```
 
 ### Example:
 
