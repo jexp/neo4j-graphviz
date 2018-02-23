@@ -11,7 +11,7 @@ Uses these libraries
 
 ### Minimal:
 
-`node render.js password`
+`node render.js`
 
 Will write a graph.jpg based on `MATCH path = (a)-[r]->(b) RETURN path`
 
