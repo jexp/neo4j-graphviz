@@ -17,8 +17,9 @@ Will write a graph.jpg based on `MATCH path = (a)-[r]->(b) RETURN path`
 
 ### Syntax
 
+Typical usage:
 ```
-cat query.cypher | node render.js password [file.png/svg/jpg] [renderer]
+cat query.cypher | node render.js --username <neo4j username> --password <neo4j password> --file [file.png/svg/jpg] --renderer [renderer]
 ```
 
 
@@ -27,7 +28,7 @@ cat query.cypher | node render.js password [file.png/svg/jpg] [renderer]
 From the [Oscars Graph](http://gist.asciidoctor.org/?dropbox-14493611/oscars.adoc).
 
 ```
-echo 'MATCH  path = (n:Nominee {name:"Meryl Streep"})<-[:NOMINATED]-(a:Nomination)-->() RETURN path' | node render.js '****' oscars.svg neato
+echo 'MATCH  path = (n:Nominee {name:"Meryl Streep"})<-[:NOMINATED]-(a:Nomination)-->() RETURN path' | node render.js --password <password> --file oscars.svg 
 ```
 
 ![](https://rawgithub.com/jexp/neo4j-graphviz/master/oscars.svg)
