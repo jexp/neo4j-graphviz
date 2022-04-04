@@ -10,12 +10,14 @@ const pass=process.env.NEO4J_PASSWORD || "test";
 const db=process.env.NEO4J_DATABASE || "neo4j";
 
 app.get('/', function(req, res){
-  const type = "svg";
+  const type = req.accepts("image/jpeg")||req.accepts("image/jpg") ? "jpeg" : 
+               req.accepts("image/svg") || req.accepts("image/svg+xml") ? "svg" : "png";
+  const style= "neato";
   const query = req.params["query"] || `MATCH (n)-[r]->(m) RETURN * LIMIT 20`;
-  ng.renderGraph(url,user, pass, db, query, "neato", type, function(error,data) {
+  ng.renderGraph(url,user, pass, db, query, style, type, function(error,data) {
     if (error) res.status(500).send(error);
     else {
-      res.type(type).send(data);
+      res.type("image/"+type).send(data);
     }
   });
 });
