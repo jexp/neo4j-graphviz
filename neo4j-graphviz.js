@@ -107,10 +107,11 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
       .then(function(result){
         var data = { nodes: {}, rels: {} }
         // Create digraph G
+        // docs: https://graphviz.org/docs/attrs/K/
         var g = graphviz.digraph("G");
         g.set("overlap",false);
         g.set("concentrate",true);
-        g.set("K",0.3);
+        g.set("K",0.5);
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
