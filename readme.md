@@ -49,3 +49,17 @@ app.get('/', function(req, res){
     }
   });
 });```
+
+## Heroku deployment
+
+https://elements.heroku.com/buildpacks/weibeld/heroku-buildpack-graphviz
+
+```
+heroku apps:create <app-name>
+heroku buildpacks:add https://github.com/weibeld/heroku-buildpack-graphviz
+
+heroku config:set NEO4J_URL="neo4j+s://demo.neo4jlabs.com" NEO4J_USER=movies NEO4J_PASSWORD=movies NEO4J_DATABASE=movies
+heroku config:set GRAPHVIZ=/app/.heroku-buildpack-graphviz/usr/bin
+
+git push heroku master
+```

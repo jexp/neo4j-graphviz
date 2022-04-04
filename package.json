@@ -5,8 +5,7 @@
   "main": "neo4j-graphviz.js",
   "scripts": {
     "test": "",
-    "start": "node render.js",
-    "web": "node web.js"
+    "start": "node web.js"
   },
   "author": "Michael Hunger",
   "license": "MIT",
