@@ -110,11 +110,11 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         var g = graphviz.digraph("G");
         g.set("overlap",false);
         g.set("concentrate",true);
-        g.set("K",0.2);
+        g.set("K",0.3);
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
-        g.set("dpi",50);
+        g.set("dpi",150);
         g.set("fontname","Helvetica");
         result.records.forEach(function(record) {
           addRecord(g, data, record);
