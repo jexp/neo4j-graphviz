@@ -1,4 +1,5 @@
-var neo4j = require('neo4j-driver').v1;
+const GRAPHVIZ = process.env.GRAPHVIZ || "/usr/local/bin";
+var neo4j = require('neo4j-driver');
 var graphviz = require('graphviz');
 // colors from: http://flatuicolors.com/
 var colors = {all:["#2ecc71","#1abc9c","#3498db","#9b59b6","#34495e","#16a085","#f1c40f","#e67e22",
@@ -86,7 +87,7 @@ function addRecord(digraph, data, record) {
     });
 }
     
-function renderGraph(url, user, password, query, renderer, file, callback) {
+function renderGraph(url, user, password, database, query, renderer, file, callback) {
 
     var file_type = file.split(".").pop();
 
@@ -99,7 +100,7 @@ function renderGraph(url, user, password, query, renderer, file, callback) {
       return;
     };
     
-    var session = driver.session();
+    var session = driver.session({database:database||"neo4j"});
     
     session
       .run(query)
@@ -123,7 +124,7 @@ function renderGraph(url, user, password, query, renderer, file, callback) {
         session.close();
         driver.close();
     
-        g.setGraphVizPath( "/usr/local/bin" );
+        g.setGraphVizPath( GRAPHVIZ );
         // Generate a file output
         if (!callback) {
             g.render( {use:renderer, type:file_type}, file );

@@ -8,7 +8,7 @@ function renderGraphCommand(query) {
     var file = process.argv[3] || "graph.jpg";
     
     var use = process.argv[4] || "neato";
-    ng.renderGraph("bolt://localhost","neo4j",pwd,query,use,file);
+    ng.renderGraph("bolt://localhost","neo4j",pwd,"neo4j",query,use,file);
 }
 
 if (process.argv.length > 2) {
