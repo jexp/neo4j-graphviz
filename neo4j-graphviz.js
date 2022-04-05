@@ -7,6 +7,14 @@ var colors = {all:["#2ecc71","#1abc9c","#3498db","#9b59b6","#34495e","#16a085","
                    "#c0392b","#d35400"], 
               used:{}};
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 function merge(o1,o2) {
     for(var k in o2) {
         if (o2.hasOwnProperty(k)) {
@@ -47,9 +55,9 @@ function addGraphData(digraph, data, field) {
                     colors.used[nLabels] = color;
                 }
                 data.nodes[id]=field;
-                var n = digraph.addNode(id, {label:nLabels + "|" + name(field)}); // merge({lblString:field.labels},field.properties));
+                var n = digraph.addNode(id, {label:/*nLabels + "|" +*/ name(field)}); // merge({lblString:field.labels},field.properties));
                 n.set( "style", "filled" );
-                n.set( "shape", "Mrecord" );
+                n.set( "shape", "Mrecord" ); // circle
                 n.set( "fillcolor", color );
                 n.set( "fontcolor", "white" );
                 n.set("fontname","Helvetica");
@@ -89,6 +97,9 @@ function addRecord(digraph, data, record) {
     
 function renderGraph(url, user, password, database, query, renderer, file, callback) {
 
+    // new color per request 
+    shuffleArray(colors.all + colors.used);
+    colors.used = [];
     var file_type = file.split(".").pop();
 
     console.log(file,file_type,renderer, query);
@@ -111,11 +122,11 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         var g = graphviz.digraph("G");
         g.set("overlap",false);
         g.set("concentrate",true);
-        g.set("K",0.5);
+        g.set("K",0.3);
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
-        g.set("dpi",150);
+        g.set("dpi",100);
         g.set("fontname","Helvetica");
         result.records.forEach(function(record) {
           addRecord(g, data, record);
