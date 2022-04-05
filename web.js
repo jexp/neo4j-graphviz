@@ -21,6 +21,9 @@ app.get('/', function(req, res){
     }
   });
 });
+
+app.use('/3d', express.static('public'))
+
 const port = process.env.PORT || 3001;
 console.log(`Server started on ${port} against ${url} user ${user} db ${db}`);
 app.listen(port);
