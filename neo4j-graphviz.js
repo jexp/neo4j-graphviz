@@ -2,10 +2,16 @@ const GRAPHVIZ = process.env.GRAPHVIZ || "/usr/local/bin";
 var neo4j = require('neo4j-driver');
 var graphviz = require('graphviz');
 // colors from: http://flatuicolors.com/
-var colors = {all:["#2ecc71","#1abc9c","#3498db","#9b59b6","#34495e","#16a085","#f1c40f","#e67e22",
+/*
+"#2ecc71","#1abc9c","#3498db","#9b59b6","#34495e","#16a085","#f1c40f","#e67e22",
                    "#e74c3c","#95a5a6","#f39c12","#2980b9","#8e44ad","#27ae60","#2c3e50","#bdc3c7",
-                   "#c0392b","#d35400"], 
-              used:{}};
+                   "#c0392b","#d35400"
+*/
+// neo4j colors
+// 
+const base_colors = ["#006FD6","#0056B3","#018BFF","#044092","#FFB8C4","#CC254B",
+"#44D4A4","#327D60","#FFDE63","#9DABD9"];
+var colors = {all:base_colors, used:{}};
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -71,6 +77,7 @@ function addGraphData(digraph, data, field) {
                 var e = digraph.addEdge(getId(field.start), getId(field.end),{label:field.type}); // , merge({type:field["type"]}, field.properties));
                 e.set( "color", "#00 00 00 40" );
                 e.set("fontname","Helvetica");
+                //e.set("minlen","0.3");
                 return e;
             }
         }
@@ -98,8 +105,8 @@ function addRecord(digraph, data, record) {
 function renderGraph(url, user, password, database, query, renderer, file, callback) {
 
     // new color per request 
-    shuffleArray(colors.all + colors.used);
-    colors.used = [];
+    colors.all = shuffleArray([...base_colors]);
+    colors.used = {};
     var file_type = file.split(".").pop();
 
     console.log(file,file_type,renderer, query);
