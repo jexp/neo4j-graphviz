@@ -13,7 +13,7 @@ app.get('/', function(req, res){
   const type = req.accepts("image/jpeg")||req.accepts("image/jpg") ? "jpeg" : 
                req.accepts("image/svg") || req.accepts("image/svg+xml") ? "svg" : "png";
   const style= "neato";
-  const query = req.params["query"] || `MATCH (n)-[r]->(m) RETURN * LIMIT 20`;
+  const query = req.query.query || `MATCH (n)-[r]->(m) RETURN * LIMIT 20`;
   ng.renderGraph(url,user, pass, db, query, style, type, function(error,data) {
     if (error) res.status(500).send(error);
     else {
