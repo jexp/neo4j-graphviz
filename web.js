@@ -13,12 +13,14 @@ app.get('/', function(req, res){
   const type = req.accepts("image/jpeg")||req.accepts("image/jpg") ? "jpeg" : 
                req.accepts("image/svg") || req.accepts("image/svg+xml") ? "svg" : "png";
   const style= "neato";
-  const user = req.query.user || undefined;
+  const screen_name = req.query.user || undefined;
   const USER_QUERY = `
-  MATCH (u1:User {screen_name: '${user}'})-[:POSTED]->()-[:MENTIONED]->(u2) 
+  MATCH (u1:User {screen_name: '${screen_name}'})
+  OPTIONAL MATCH (u1)-[:POSTED]->()-[:MENTIONED]->(u2) 
   OPTIONAL MATCH (u2)-[:POSTED]->()-[:MENTIONED]->(u3) 
-  RETURN u1,u2, u3, apoc.create.vRelationship(u2,'INSPIRED',{}, u1) as r1,
-        case u3 when null then null else apoc.create.vRelationship(u3,'INSPIRED',{}, u2) end as r2
+  RETURN u1,u2, u3, 
+        case when u2 is not null then apoc.create.vRelationship(u2,'INSPIRED',{}, u1) end as r1,
+        case when u3 is not null then apoc.create.vRelationship(u3,'INSPIRED',{}, u2) end as r2
   LIMIT 25
   `;
 
@@ -27,7 +29,7 @@ app.get('/', function(req, res){
   RETURN apoc.create.vRelationship(u2,'INSPIRED',{},u1),u1,u2 limit 25
   `
   
-  const query = req.query.query || user ? USER_QUERY : QUERY;
+  const query = req.query.query || screen_name ? USER_QUERY : QUERY;
 
   ng.renderGraph(url,user, pass, db, query, style, type, function(error,data) {
     if (error) res.status(500).send(error);

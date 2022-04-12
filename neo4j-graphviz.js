@@ -78,7 +78,7 @@ function addGraphData(digraph, data, field) {
                 var e = digraph.addEdge(getId(field.start), getId(field.end),{label:field.type}); // , merge({type:field["type"]}, field.properties));
                 e.set( "color", "#00 00 00 40" );
                 e.set("fontname","Helvetica");
-                //e.set("minlen","0.3");
+                e.set("len",1.5);
                 return e;
             }
         }
@@ -113,6 +113,7 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
     console.log(file,file_type,renderer, query);
     
     var driver = neo4j.driver(url, neo4j.auth.basic(user, password));
+    driver.verifyConnectivity();
     driver.onError = function(error) {
       console.log('Driver instantiation failed', error);
       if (callback) callback('Driver instantiation failed' + error,null);
@@ -128,9 +129,10 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         // Create digraph G
         // docs: https://graphviz.org/docs/attrs/K/
         var g = graphviz.digraph("G");
-        g.set("overlap",false);
-        g.set("concentrate",true);
-        g.set("K",0.3);
+        // g.set("overlap",false);
+        g.set("concentrate",false);
+        g.set("pack",false);
+        // g.set("K",0.5);
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
