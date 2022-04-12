@@ -75,10 +75,10 @@ function addGraphData(digraph, data, field) {
             if (!(id in data.rels)) {
                 data.rels[id]=field;
 //              console.log("addEdge",getId(field.start), getId(field.end))
-                var e = digraph.addEdge(getId(field.start), getId(field.end),{label:field.type}); // , merge({type:field["type"]}, field.properties));
+                var e = digraph.addEdge(getId(field.start), getId(field.end));// ,{label:field.type} // , merge({type:field["type"]}, field.properties));
                 e.set( "color", "#00 00 00 40" );
                 e.set("fontname","Helvetica");
-                e.set("len",1.5);
+                e.set("len",2.0);
                 return e;
             }
         }
