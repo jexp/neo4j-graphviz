@@ -14,8 +14,15 @@
       const driver = neo4j.driver("neo4j+s://demo.neo4jlabs.com", neo4j.auth.basic("inspired", "inspired"));
       const session = driver.session({database:"inspired"});
       const start = new Date()
+      const query = `
+      MATCH (m:User)-[:POSTED]->(t:Tweet)-[:MENTIONED]->(n:User),(t)-[:TAGGED]->(:Tag {name:"inspiredby"})
+      RETURN { id: id(n), label:head(labels(n)), community:n.louvain, caption:n.screen_name, size:(size((n)<--())+1)/10.0 } as source, 
+        { id: id(m), label:head(labels(m)), community:n.louvain, caption:m.screen_name, size:(size((m)<--())+1)/10.0 } as target, 
+        {weight:1, type:'INSPIRED', community:case when n.community < m.community then n.community else m.community end} as rel 
+      LIMIT $limit
+      `;
       session
-        .run('MATCH (n)-[r:INSPIRED]->(m) RETURN { id: id(n), label:head(labels(n)), community:n.louvain, caption:n.screen_name, size:n.pagerank } as source, { id: id(m), label:head(labels(m)), community:n.louvain, caption:m.screen_name, size:m.pagerank } as target, {weight:r.weight, type:type(r), community:case when n.community < m.community then n.community else m.community end} as rel LIMIT $limit', {limit: neo4j.int(5000)})
+        .run(query, {limit: neo4j.int(5000)})
         .then(function (result) {
           const nodes = {}
           const links = result.records.map(r => { 
