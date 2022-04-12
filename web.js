@@ -13,7 +13,22 @@ app.get('/', function(req, res){
   const type = req.accepts("image/jpeg")||req.accepts("image/jpg") ? "jpeg" : 
                req.accepts("image/svg") || req.accepts("image/svg+xml") ? "svg" : "png";
   const style= "neato";
-  const query = req.query.query || `MATCH (n)-[r]->(m) RETURN * LIMIT 20`;
+  const user = req.query.user || undefined;
+  const USER_QUERY = `
+  MATCH (u1:User {screen_name: '${user}'})-[:POSTED]->()-[:MENTIONED]->(u2) 
+  OPTIONAL MATCH (u2)-[:POSTED]->()-[:MENTIONED]->(u3) 
+  RETURN u1,u2, u3, apoc.create.vRelationship(u2,'INSPIRED',{}, u1) as r1,
+        apoc.create.vRelationship(u3,'INSPIRED',{}, u2) as r2
+  LIMIT 25
+  `;
+
+  const QUERY = `
+  MATCH (u1:User)-[:POSTED]->(t:Tweet)-[:MENTIONED]->(u2:User),(t)-[:TAGGED]->(:Tag {name:"inspiredby"})
+  RETURN apoc.create.vRelationship(u2,'INSPIRED',{},u1),u1,u2 limit 25
+  `
+  
+  const query = req.query.query || user ? USER_QUERY : QUERY;
+
   ng.renderGraph(url,user, pass, db, query, style, type, function(error,data) {
     if (error) res.status(500).send(error);
     else {

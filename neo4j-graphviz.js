@@ -9,8 +9,9 @@ var graphviz = require('graphviz');
 */
 // neo4j colors
 // 
-const base_colors = ["#006FD6","#0056B3","#018BFF","#044092","#FFB8C4","#CC254B",
-"#44D4A4","#327D60","#FFDE63","#9DABD9"];
+const base_colors = ["#A3E2FF","#006FD6","#0056B3","#018BFF","#044092","#FFB8C4","#ED1252","#CC254B","#7A0031",
+"#00BA88","#44D4A4","#327D60","#FFEA8C","#FFDE63","#D9B54A","#9DABD9","#3557B4","#25459E",
+"#55F9E2","#2AADA5","#116161"];
 var colors = {all:base_colors, used:{}};
 
 function shuffleArray(array) {
