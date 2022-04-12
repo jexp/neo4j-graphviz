@@ -18,7 +18,7 @@ app.get('/', function(req, res){
   MATCH (u1:User {screen_name: '${user}'})-[:POSTED]->()-[:MENTIONED]->(u2) 
   OPTIONAL MATCH (u2)-[:POSTED]->()-[:MENTIONED]->(u3) 
   RETURN u1,u2, u3, apoc.create.vRelationship(u2,'INSPIRED',{}, u1) as r1,
-        apoc.create.vRelationship(u3,'INSPIRED',{}, u2) as r2
+        case u3 when null then null else apoc.create.vRelationship(u3,'INSPIRED',{}, u2) end as r2
   LIMIT 25
   `;
 
