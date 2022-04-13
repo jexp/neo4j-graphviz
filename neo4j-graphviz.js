@@ -136,8 +136,21 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
-        g.set("dpi",100);
+        g.set("dpi",150);
         g.set("fontname","Helvetica");
+        g.set("lwidth",1200);
+        g.set("lheight",675);
+        g.addNode("neo4jlogo", {
+            label: "",
+            pos : "250,0!",
+            margin: 0,
+            pad: 0,
+            pin: true,
+            width:0.5, height:0.19,
+            fixedsize: true,
+            shape: "none",
+            image: "public/neo4j.png"
+        });
         result.records.forEach(function(record) {
           addRecord(g, data, record);
         });
@@ -149,7 +162,7 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         g.setGraphVizPath( GRAPHVIZ );
         // Generate a file output
         if (!callback) {
-            g.render( {use:renderer, type:file_type}, file );
+            g.render( {use:renderer, type:file_type, G: { inputscale: 72}}, file );
             console.log("Wrote file "+file)
         } else {
             // Generate a callback output
