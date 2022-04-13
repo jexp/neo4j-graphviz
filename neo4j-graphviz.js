@@ -9,7 +9,7 @@ var graphviz = require('graphviz');
 */
 // neo4j colors
 // 
-const base_colors = ["#A3E2FF","#006FD6","#0056B3","#018BFF","#044092","#FFB8C4","#ED1252","#CC254B","#7A0031",
+const base_colors = ["#006FD6","#A3E2FF","#0056B3","#018BFF","#044092","#FFB8C4","#ED1252","#CC254B","#7A0031",
 "#00BA88","#44D4A4","#327D60","#FFEA8C","#FFDE63","#D9B54A","#9DABD9","#3557B4","#25459E",
 "#55F9E2","#2AADA5","#116161"];
 var colors = {all:base_colors, used:{}};
@@ -136,10 +136,9 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         g.set("outputorder","edgesfirst");
         g.set("splines","curved");
         g.set("rankdir","LR");
-        g.set("dpi",150);
+        g.set("dpi",100);
         g.set("fontname","Helvetica");
-        g.set("lwidth",1200);
-        g.set("lheight",675);
+        g.set("size","12,6.75!");
         g.addNode("neo4jlogo", {
             label: "",
             pos : "250,0!",
