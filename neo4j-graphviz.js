@@ -38,7 +38,7 @@ function labels(node) {
     return ":"+node.labels.join(":");
 }
 function name(node) {
-    var x = ["^name$","^title$","^label$","value","name$","title$","label$",""];
+    var x = ["^screen_name$","^name$","^title$","^label$","value","name$","title$","label$",""];
     var props = node.properties;
     for (var i=0;i<x.length;i++) {
         for (k in props) {
