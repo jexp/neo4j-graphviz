@@ -7,15 +7,17 @@ var graphviz = require('graphviz');
                    "#e74c3c","#95a5a6","#f39c12","#2980b9","#8e44ad","#27ae60","#2c3e50","#bdc3c7",
                    "#c0392b","#d35400"
 */
-// neo4j colors
 // 
-const base_colors = ["#006FD6","#A3E2FF","#0056B3","#018BFF","#044092","#FFB8C4","#ED1252","#CC254B","#7A0031",
+const base_colors = ["#018BFF"]; 
+// neo4j colors
+/* ["#006FD6","#A3E2FF","#0056B3","#018BFF","#044092","#FFB8C4","#ED1252","#CC254B","#7A0031",
 "#00BA88","#44D4A4","#327D60","#FFEA8C","#FFDE63","#D9B54A","#9DABD9","#3557B4","#25459E",
 "#55F9E2","#2AADA5","#116161"];
+*/
 var colors = {all:base_colors, used:{}};
 
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
+    for (let i = array.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
@@ -106,7 +108,7 @@ function addRecord(digraph, data, record) {
 function renderGraph(url, user, password, database, query, renderer, file, callback) {
 
     // new color per request 
-    colors.all = shuffleArray([...base_colors]);
+    colors.all = [...base_colors]; // shuffleArray([...base_colors]);
     colors.used = {};
     var file_type = file.split(".").pop();
 
