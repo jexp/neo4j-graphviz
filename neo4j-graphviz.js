@@ -63,6 +63,7 @@ function addGraphData(digraph, data, field) {
                 if (!(nLabels in colors.used)) {
                     colors.used[nLabels] = color;
                 }
+                console.log("addNode",getId(field))
                 data.nodes[id]=field;
                 var n = digraph.addNode(id, {label:/*nLabels + "|" +*/ name(field)}); // merge({lblString:field.labels},field.properties));
                 n.set( "style", "filled" );
@@ -76,7 +77,7 @@ function addGraphData(digraph, data, field) {
         if (type == "Relationship") {
             if (!(id in data.rels)) {
                 data.rels[id]=field;
-//              console.log("addEdge",getId(field.start), getId(field.end))
+                console.log("addEdge",getId(field.start), getId(field.end))
                 var e = digraph.addEdge(getId(field.start), getId(field.end));// ,{label:field.type} // , merge({type:field["type"]}, field.properties));
                 e.set( "color", "#00 00 00 40" );
                 e.set("fontname","Helvetica");
