@@ -116,12 +116,12 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
     console.log(file,file_type,renderer, query);
     
     var driver = neo4j.driver(url, neo4j.auth.basic(user, password));
-    driver.verifyConnectivity();
     driver.onError = function(error) {
-      console.log('Driver instantiation failed', error);
-      if (callback) callback('Driver instantiation failed' + error,null);
-      return;
-    };
+        console.log('Driver instantiation failed', error);
+        if (callback) callback('Driver instantiation failed' + error,null);
+        return;
+      };
+    driver.verifyConnectivity();
     
     var session = driver.session({database:database||"neo4j"});
     

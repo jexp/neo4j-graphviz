@@ -39,7 +39,8 @@
           // https://github.com/vasturiano/3d-force-graph#link-styling
           const Graph = ForceGraph3D()(elem)
                         .graphData(gData)
-                        .nodeAutoColorBy('label') // community
+                        .nodeColor("#018bff")
+                        // .nodeAutoColorBy('label') // community
                         .nodeVal('size')
                         .linkAutoColorBy('type') // community
                         .linkWidth(0)
