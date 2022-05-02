@@ -1,6 +1,8 @@
 <head>
     <style> body { margin: 0; } </style>
   
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/three-spritetext"></script>
     <script src="//unpkg.com/3d-force-graph"></script>
     <script src="https://unpkg.com/neo4j-driver"></script>
     <!--<script src="../../dist/3d-force-graph.js"></script>-->
@@ -39,15 +41,24 @@
           // https://github.com/vasturiano/3d-force-graph#link-styling
           const Graph = ForceGraph3D()(elem)
                         .graphData(gData)
-                        .nodeColor("#018bff")
-                        // .nodeAutoColorBy('label') // community
+                        // .nodeColor("#018bff")
+                        .nodeAutoColorBy('label') // community
                         .nodeVal('size')
                         .linkAutoColorBy('type') // community
-                        .linkWidth(0)
-                        .linkDirectionalParticles(20) // ('weight')
-                        .linkDirectionalParticleSpeed(0.1) // 'weight'
+                        .linkWidth(2)
+                        // .linkDirectionalParticles(20) // ('weight')
+                        // .linkDirectionalParticleSpeed(0.1) // 'weight'
                         // .linkDirectionalParticleColor
-                        .nodeLabel(node => `${node.label}: ${node.caption}`)
+                        .nodeLabel(node => node.caption)
+                        .nodeThreeObject(node => {
+                          console.log(node.caption);
+                          const sprite = new SpriteText(node.caption);
+                          sprite.material.depthWrite = false; // make sprite background transparent
+                          sprite.color = node.color;
+                          sprite.textHeight = 8;
+                          return sprite;
+                        })
+                        .onNodeClick(node => window.open("https://twitter.com/"+node.caption))
                         .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null);
         })
         .catch(function (error) {
