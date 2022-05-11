@@ -44,8 +44,10 @@
                         // .nodeColor("#018bff")
                         .nodeAutoColorBy('label') // community
                         .nodeVal('size')
-                        .linkAutoColorBy('type') // community
-                        .linkWidth(2)
+                        .linkColor('white')
+                        .linkOpacity(0.7)
+                        // .linkAutoColorBy('type') // community
+                        .linkWidth(1)
                         // .linkDirectionalParticles(20) // ('weight')
                         // .linkDirectionalParticleSpeed(0.1) // 'weight'
                         // .linkDirectionalParticleColor
@@ -55,7 +57,7 @@
                           const sprite = new SpriteText(node.caption);
                           sprite.material.depthWrite = false; // make sprite background transparent
                           sprite.color = node.color;
-                          sprite.textHeight = 8;
+                          sprite.textHeight = 6;
                           return sprite;
                         })
                         .onNodeClick(node => window.open("https://twitter.com/"+node.caption))
